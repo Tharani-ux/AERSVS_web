@@ -5,99 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AERSVS System</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; padding: 20px; background-color: #f4f4f4; }
-        h1, h2, h3 { color: #333; }
-        .container { max-width: 1200px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .section { margin-bottom: 20px; }
-        pre { background: #eee; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #ffcc00;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .code {
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        .highlight {
+            color: #ff5722;
+        }
+        a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Automatic Emergency Response System via Satellite (AERSVS)</h1>
-        
-        <div class="section">
-            <h2>Step 1: Automated & Manual Triggering</h2>
-            <h3>Scenario 1.1 - Automated Triggering (AT)</h3>
-            <p>When a vehicle crashes, MEMS sensors detect the impact and trigger AERSVS within 10 to 30 milliseconds.</p>
-            <h3>Process Explanation</h3>
+        <h1>AERSVS System</h1>
+        <h2>Step 1: Scenario 1.1 Automated Triggering (AT)</h2>
+        <p>When a car travels fast and suddenly crashes, the <span class="highlight">MEMS system</span> detects the crash and triggers the AERSVS system within 10 to 30 milliseconds.</p>
+        <h3>Process Explanation</h3>
+        <p>MEMS sensors detect the crash using accelerometers, brake sensors, and seatbelt sensors. The information is transferred via the <span class="highlight">CAN bus network</span>.</p>
+        <h3>Setup 1: Microcontroller/Processor</h3>
+        <p>The microcontroller bridges the car’s CAN network and the Iridium modem, reading CAN data and sending it via UART.</p>
+        <h3>Setup 2: CAN Bus Integration</h3>
+        <p>
             <ul>
-                <li>MEMS sensors detect crashes via accelerometer, brake, and seatbelt sensors.</li>
-                <li>Data is transferred through CAN bus (digital and analog communication ports).</li>
+                <li>CAN Transceiver connects to the car’s CAN bus.</li>
+                <li>CAN_H and CAN_L connect to the CAN bus.</li>
+                <li>The microcontroller communicates with the transceiver via TXD and RXD.</li>
             </ul>
-        </div>
-
-        <div class="section">
-            <h3>Setup 1: Microcontroller Integration</h3>
+        </p>
+        <h3>Setup 3: Iridium 9603 Modem Connection</h3>
+        <p>
             <ul>
-                <li>Microcontroller bridges the car's CAN network and Iridium modem.</li>
-                <li>Reads data from CAN bus and sends it via UART to Iridium.</li>
+                <li>Power supply: 3.2V–5.5V</li>
+                <li>UART interface for TXD and RXD communication</li>
+                <li>Optional CTS/RTS flow control</li>
             </ul>
+        </p>
+        <h2>Iridium 9603 Data Transfer Capabilities</h2>
+        <p>Designed for low-bandwidth, global data communication via the Iridium satellite network.</p>
+        <div class="code">
+            <p>Max Uplink: 340 bytes per message</p>
+            <p>Max Downlink: 270 bytes per message</p>
+            <p>Latency: 20-60 sec per message</p>
         </div>
-
-        <div class="section">
-            <h3>Setup 2: CAN Bus Integration</h3>
+        <h3>Challenges & Solutions</h3>
+        <p>
             <ul>
-                <li>Microcontroller connects to the CAN bus via a CAN transceiver.</li>
-                <li>CAN_H and CAN_L connect to the car's CAN bus.</li>
-                <li>Communication via TXD (CAN data to bus) and RXD (CAN data from bus) pins.</li>
+                <li>Filter important data to fit within the 340-byte limit.</li>
+                <li>Compress messages before transmission.</li>
+                <li>Use batch transmission instead of real-time.</li>
             </ul>
-        </div>
-
-        <div class="section">
-            <h3>Setup 3: Iridium 9603 Modem Connection</h3>
+        </p>
+        <h2>Scenario 1.2: Manual Triggering (UKB Button)</h2>
+        <p>The system can be manually triggered in case of emergencies via the <span class="highlight">Uyire Kapan Button (UKB)</span>, which is located in a safe position inside the car.</p>
+        <h2>Step 2: Server Communication</h2>
+        <p>Data from the Iridium modem is sent to the server and categorized based on emergency type.</p>
+        <h3>Case 1: 112 Services</h3>
+        <p>
             <ul>
-                <li>Power: 3.2V-5.5V</li>
-                <li>UART Interface: TXD -> RX (MCU), RXD -> TX (MCU)</li>
-                <li>AT Commands: <code>AT+SBDWT=&lt;data&gt;</code>, <code>AT+SBDIX</code></li>
+                <li>Channel 1: Voice call</li>
+                <li>Channel 2: SMS</li>
+                <li>Channel 3: Email</li>
+                <li>Channel 4: Web portal</li>
             </ul>
-        </div>
-        
-        <div class="section">
-            <h3>Data Flow Example</h3>
-            <pre>
-(Car CAN Bus) ----> [CAN Transceiver] ----> (Microcontroller)
-                                     |
-                              (UART Interface)
-                                     |
-                            [Iridium 9603 Modem]
-            </pre>
-        </div>
-
-        <div class="section">
-            <h2>Step 2: Server Communication</h2>
-            <h3>Case 1: 112 Services</h3>
+        </p>
+        <h3>Case 2: Nearest Emergency Services (NES)</h3>
+        <p>
+            The system finds the nearest emergency services based on GPS coordinates and government databases.
+        </p>
+        <h2>Step 3: Emergency Contact Notification</h2>
+        <p>After confirming emergency detection, the system notifies predefined contacts via:</p>
+        <p>
             <ul>
-                <li>Receives data from the satellite ground station and sends it to emergency services.</li>
-                <li>Communication Channels:
-                    <ul>
-                        <li>Voice Call</li>
-                        <li>SMS</li>
-                        <li>Email</li>
-                        <li>New Portal</li>
-                    </ul>
-                </li>
+                <li>Voice call</li>
+                <li>SMS</li>
             </ul>
-        </div>
-        
-        <div class="section">
-            <h2>Step 3: Emergency Contact Notification</h2>
+        </p>
+        <h2>Step 4: Mobile Application Features</h2>
+        <p>The mobile app enables real-time monitoring and alerts.</p>
+        <h3>VtoO Data Parameters</h3>
+        <p>
             <ul>
-                <li>After confirming the emergency, notify relatives and friends via:</li>
-                <li>Channel 1 - Voice Call</li>
-                <li>Channel 2 - SMS</li>
+                <li>Vehicle Speed</li>
+                <li>Engine RPM</li>
+                <li>Fuel Level</li>
+                <li>Battery Voltage</li>
+                <li>Brake Status</li>
+                <li>Airbag Status</li>
+                <li>Diagnostic Trouble Codes (DTCs)</li>
             </ul>
+        </p>
+        <h2>Total Estimated Data Size Per Second</h2>
+        <div class="code">
+            <p>125 kbps → ~600 bytes/sec</p>
+            <p>250 kbps → ~1.2 KB/sec</p>
+            <p>500 kbps → ~6 KB/sec</p>
+            <p>1 Mbps → ~12 KB/sec</p>
         </div>
-        
-        <div class="section">
-            <h2>Step 4: Mobile Application (MA)</h2>
-            <h3>Features</h3>
-            <ul>
-                <li>Real-time vehicle data monitoring</li>
-                <li>Automation & Alerts</li>
-                <li>Emergency Notifications</li>
-            </ul>
-        </div>
+        <p>For more details, visit our <a href="#">official website</a>.</p>
     </div>
 </body>
 </html>
