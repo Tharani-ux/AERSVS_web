@@ -3,73 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Presentation</title>
+    <title>AERSVS System</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            color: #333;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
-        }
-        h1 {
-            color: #ff4a57;
-        }
-        .section {
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 8px;
-            background: #f0f0f0;
-        }
-        .highlight {
-            color: #ff4a57;
-            font-weight: bold;
-        }
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #ff4a57;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background: #e03e4f;
-        }
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; padding: 20px; background-color: #f4f4f4; }
+        h1, h2, h3 { color: #333; }
+        .container { max-width: 1200px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .section { margin-bottom: 20px; }
+        pre { background: #eee; padding: 10px; border-radius: 5px; overflow-x: auto; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>AUTOMATED EMERGENCY RESPONSE SYSTEM VIA SATELLITE</h1>
+        <h1>Automatic Emergency Response System via Satellite (AERSVS)</h1>
+        
         <div class="section">
-            <h2>Overview</h2>
-            <p>Our project aims to create an <span class="highlight">IoT-enabled automatic emergency response system</span> using satellite communication for real-time traffic management.</p>
-        </div>
-        <div class="section">
-            <h2>Key Features</h2>
+            <h2>Step 1: Automated & Manual Triggering</h2>
+            <h3>Scenario 1.1 - Automated Triggering (AT)</h3>
+            <p>When a vehicle crashes, MEMS sensors detect the impact and trigger AERSVS within 10 to 30 milliseconds.</p>
+            <h3>Process Explanation</h3>
             <ul>
-                <li>Real-time GPS tracking & communication</li>
-                <li>Automated emergency response</li>
-                <li>Vehicle-to-infrastructure (V2I) technology</li>
-                <li>Satellite connectivity for remote areas</li>
+                <li>MEMS sensors detect crashes via accelerometer, brake, and seatbelt sensors.</li>
+                <li>Data is transferred through CAN bus (digital and analog communication ports).</li>
             </ul>
         </div>
+
         <div class="section">
-            <h2>Benefits</h2>
-            <p>Ensuring <span class="highlight">faster emergency response</span>, reducing <span class="highlight">traffic congestion</span>, and saving <span class="highlight">valuable lives</span>.</p>
+            <h3>Setup 1: Microcontroller Integration</h3>
+            <ul>
+                <li>Microcontroller bridges the car's CAN network and Iridium modem.</li>
+                <li>Reads data from CAN bus and sends it via UART to Iridium.</li>
+            </ul>
         </div>
-        <a href="#" class="btn">Learn More</a>
+
+        <div class="section">
+            <h3>Setup 2: CAN Bus Integration</h3>
+            <ul>
+                <li>Microcontroller connects to the CAN bus via a CAN transceiver.</li>
+                <li>CAN_H and CAN_L connect to the car's CAN bus.</li>
+                <li>Communication via TXD (CAN data to bus) and RXD (CAN data from bus) pins.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Setup 3: Iridium 9603 Modem Connection</h3>
+            <ul>
+                <li>Power: 3.2V-5.5V</li>
+                <li>UART Interface: TXD -> RX (MCU), RXD -> TX (MCU)</li>
+                <li>AT Commands: <code>AT+SBDWT=&lt;data&gt;</code>, <code>AT+SBDIX</code></li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h3>Data Flow Example</h3>
+            <pre>
+(Car CAN Bus) ----> [CAN Transceiver] ----> (Microcontroller)
+                                     |
+                              (UART Interface)
+                                     |
+                            [Iridium 9603 Modem]
+            </pre>
+        </div>
+
+        <div class="section">
+            <h2>Step 2: Server Communication</h2>
+            <h3>Case 1: 112 Services</h3>
+            <ul>
+                <li>Receives data from the satellite ground station and sends it to emergency services.</li>
+                <li>Communication Channels:
+                    <ul>
+                        <li>Voice Call</li>
+                        <li>SMS</li>
+                        <li>Email</li>
+                        <li>New Portal</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Step 3: Emergency Contact Notification</h2>
+            <ul>
+                <li>After confirming the emergency, notify relatives and friends via:</li>
+                <li>Channel 1 - Voice Call</li>
+                <li>Channel 2 - SMS</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Step 4: Mobile Application (MA)</h2>
+            <h3>Features</h3>
+            <ul>
+                <li>Real-time vehicle data monitoring</li>
+                <li>Automation & Alerts</li>
+                <li>Emergency Notifications</li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
