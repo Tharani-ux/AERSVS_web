@@ -48,15 +48,17 @@
         <h2>Step 1: Scenario 1.1 Automated Triggering (AT)</h2>
         <p>When a car travels fast and suddenly crashes, the <span class="highlight">MEMS system</span> detects the crash and triggers the AERSVS system within 10 to 30 milliseconds.</p>
         <h3>Process Explanation</h3>
-        <p>MEMS sensors detect the crash using accelerometers, brake sensors, and seatbelt sensors. The information is transferred via the <span class="highlight">CAN bus network</span>.</p>
+        <p>MEMS sensors detect the crash using accelerometers, brake sensors, and seatbelt sensors. The information is transferred via the <span class="highlight">CAN bus network</span>(digital and analog communication ports).</p>
         <h3>Setup 1: Microcontroller/Processor</h3>
-        <p>The microcontroller bridges the car’s CAN network and the Iridium modem, reading CAN data and sending it via UART.</p>
+        <p>The microcontroller acts as a bridge between the car's CAN network and the Iridium modem.</p>
+        <p>It reads data from the CAN bus (via the CAN transceiver) and sends it to the Iridium modem using the UART interface.</p>
         <h3>Setup 2: CAN Bus Integration</h3>
+        
         <p>
             <ul>
-                <li>CAN Transceiver connects to the car’s CAN bus.</li>
-                <li>CAN_H and CAN_L connect to the CAN bus.</li>
-                <li>The microcontroller communicates with the transceiver via TXD and RXD.</li>
+                <li><span class="highlight">CAN Transceiver:</span> Connect your microcontroller to the car's CAN bus through a CAN transceiver.</li>
+                <li>CAN_H and CAN_L of the transceiver connect to the car's CAN bus.</li>
+                <li>The microcontroller communicates with the transceiver via TXD (CAN data to bus) and RXD (CAN data from bus) pins.</li>
             </ul>
         </p>
         <h3>Setup 3: Iridium 9603 Modem Connection</h3>
