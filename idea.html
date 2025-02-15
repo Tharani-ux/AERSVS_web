@@ -47,14 +47,15 @@
     <h1 style="text-align: center;">AUTOMATED EMERGENCY RESPONSE SYSTEM VIA SATELLITE</h1>
      <h1 style="text-align: center;">IDEA</h1>
     <div class="container">
-        <h2>Step 1: Scenario 1.1 Automated Triggering (AT)</h2>
+        <h2>Step 1:</h2>
+        <h3>Scenario 1.1 Automated Triggering (AT)</h3>
         <p>When a car travels fast and suddenly crashes, the <span class="highlight">MEMS system</span> detects the crash and triggers the AERSVS system within 10 to 30 milliseconds.</p>
         <h3>Process Explanation</h3>
         <p>MEMS sensors detect the crash using accelerometers, brake sensors, and seatbelt sensors. The information is transferred via the <span class="highlight">CAN bus network</span>(digital and analog communication ports).</p>
-        <h3>Setup 1: Microcontroller/Processor</h3>
+        <h4>Setup 1: Microcontroller/Processor</h4>
         <p>The microcontroller acts as a bridge between the car's CAN network and the Iridium modem.</p>
         <p>It reads data from the CAN bus (via the CAN transceiver) and sends it to the Iridium modem using the UART interface.</p>
-        <h3>Setup 2: CAN Bus Integration</h3>
+        <h4>Setup 2: CAN Bus Integration</h4>
         
         <p>
             <ul>
@@ -63,7 +64,7 @@
                 <li>The microcontroller communicates with the transceiver via TXD (CAN data to bus) and RXD (CAN data from bus) pins.</li>
             </ul>
         </p>
-        <h3>Setup 3: Iridium 9603 Modem Connection</h3>
+        <h4>Setup 3: Iridium 9603 Modem Connection</h4>
         <p>
             <ul>
                 <li>Power supply: 3.2V–5.5V</li>
