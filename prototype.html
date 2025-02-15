@@ -96,11 +96,36 @@
             <h1>Flowchart</h1>
             <img src="flowchat.png" alt="Flowchart">
             <h1>CircuitDiagram</h1>
-            <img src="circuitdiagram.png" alt="CircuitDiagram">
+            <div class="magnifier-container">
+                <img src="circuitdiagram.png" alt="Circuit Diagram" id="circuitImage">
+                <div class="magnifier-lens" id="lens"></div>
+            </div>
         </div>
     </div>
     <p style="text-align: center;"> For More details<a href="https://docs.google.com/document/d/1uZvnxhNfb_6SXuuvcqhgTPqr8le0dclZfSx4n_qZ7Hs/edit?usp=sharing">Document</a></p>         
     <p style="text-align: center;" >&copy; 2025 Global Emergency Network. All rights reserved.</p>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const image = document.getElementById("circuitImage");
+            const lens = document.getElementById("lens");
+            const zoomFactor = 5; // Increased zoom to 5x
+
+            image.addEventListener("mousemove", function (event) {
+                const { left, top, width, height } = image.getBoundingClientRect();
+                const x = event.clientX - left;
+                const y = event.clientY - top;
+
+                lens.style.left = `${x - 50}px`;
+                lens.style.top = `${y - 50}px`;
+                lens.style.display = "block";
+                lens.style.backgroundImage = `url(${image.src})`;
+                lens.style.backgroundPosition = `-${x * zoomFactor - 50}px -${y * zoomFactor - 50}px`;
+                lens.style.backgroundSize = `${width * zoomFactor}px ${height * zoomFactor}px`;
+            });
+
+            image.addEventListener("mouseleave", () => lens.style.display = "none");
+        });
+    </script>
 
 </body>
 </html>
