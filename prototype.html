@@ -16,7 +16,7 @@
             color: #ffcc00;
         }
         .container {
-            max-width: 800px;
+            max-width: 100%;
             margin: auto;
         }
         .section {
@@ -40,7 +40,10 @@
             text-decoration: underline;
         }
          .image-container {
-            margin: 0px 0;
+            background-color: #1e1e1e;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -58,36 +61,9 @@
                 <li><a href="leds.png" target="_blank">LEDs (Rx, Tx, Power)</a> - Status Indicators</li>
                 <li><a href="power.jpeg" target="_blank">Power Supply (3.7V Li-ion & 5V Regulator)</a></li>
             </ul>
-        
-      
             <h2>2. Schematic Design in KiCad</h2>
-     
-        
-        
             <h2>3. PCB Layout in KiCad</h2>
-        
-      
-        
-        
             <h2>4. Firmware Development for ESP32</h2>
-            <p>Use the following code snippet to initialize CAN communication:</p>
-            <code>
-#include &lt;SPI.h&gt;
-#include &lt;Wire.h&gt;
-#include &lt;CAN.h&gt;
-
-void setup() {
-    Serial.begin(115200);
-    if (!CAN.begin(500E3)) {
-        Serial.println("CAN Init Failed!");
-        while (1);
-    }
-    Serial.println("CAN Initialized Successfully");
-}
-            </code>
-        
-        
-         
             <h2>5. Final Testing & Debugging</h2>
             <p>Check LED responses, verify CAN communication, and test the Iridium modem.</p>
             
