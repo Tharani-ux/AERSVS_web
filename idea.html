@@ -12,7 +12,7 @@
             margin: 20px;
             line-height: 1.6;
         }
-        h1, h2, h3 {
+        h1, h2, h3,h4 {
             color: #ffcc00;
         }
         .container {
@@ -41,6 +41,13 @@
         a:hover {
             text-decoration: underline;
         }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #1e1e1e;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -50,61 +57,29 @@
         <h2>Step 1:</h2>
         <h3>Scenario 1.1 Automated Triggering (AT)</h3>
         <p>When a car travels fast and suddenly crashes, the <span class="highlight">MEMS system</span> detects the crash and triggers the AERSVS system within 10 to 30 milliseconds.</p>
-        <h3>Process Explanation</h3>
-        <p>MEMS sensors detect the crash using accelerometers, brake sensors, and seatbelt sensors. The information is transferred via the <span class="highlight">CAN bus network</span>(digital and analog communication ports).</p>
-        <h4>Setup 1: Microcontroller/Processor</h4>
-        <p>The microcontroller acts as a bridge between the car's CAN network and the Iridium modem.</p>
-        <p>It reads data from the CAN bus (via the CAN transceiver) and sends it to the Iridium modem using the UART interface.</p>
-        <h4>Setup 2: CAN Bus Integration</h4>
-        
-        <p>
-            <ul>
-                <li><span class="highlight">CAN Transceiver:</span> Connect your microcontroller to the car's CAN bus through a CAN transceiver.</li>
-                <li>CAN_H and CAN_L of the transceiver connect to the car's CAN bus.</li>
-                <li>The microcontroller communicates with the transceiver via TXD (CAN data to bus) and RXD (CAN data from bus) pins.</li>
-            </ul>
-        </p>
-        <h4>Setup 3: Iridium 9603 Modem Connection</h4>
-        <p>
-            <ul>
-                <li>Power supply: 3.2V–5.5V</li>
-                <li>UART interface for TXD and RXD communication</li>
-                <li>Optional CTS/RTS flow control</li>
-            </ul>
-        </p>
-        <h2>Iridium 9603 Data Transfer Capabilities</h2>
-        <p>Designed for low-bandwidth, global data communication via the Iridium satellite network.</p>
-        <div class="code">
-            <p>Max Uplink: 340 bytes per message</p>
-            <p>Max Downlink: 270 bytes per message</p>
-            <p>Latency: 20-60 sec per message</p>
-        </div>
-        <h3>Challenges & Solutions</h3>
-        <p>
-            <ul>
-                <li>Filter important data to fit within the 340-byte limit.</li>
-                <li>Compress messages before transmission.</li>
-                <li>Use batch transmission instead of real-time.</li>
-            </ul>
-        </p>
-        <h2>Scenario 1.2: Manual Triggering (UKB Button)</h2>
+        <h3>Scenario 1.2 Manual Triggering (UKB Button)</h3>
         <p>The system can be manually triggered in case of emergencies via the <span class="highlight">Uyire Kapan Button (UKB)</span>, which is located in a safe position inside the car.</p>
-        <h2>Step 2: Server Communication</h2>
-        <p>Data from the Iridium modem is sent to the server and categorized based on emergency type.</p>
-        <h3>Case 1: 112 Services</h3>
+        <h3>Process Explanation</h3>
+        <p> 
+            <ul>
+                <li>MEMS sensors detect the crash using accelerometers, brake sensors, and seatbelt sensors.</li>
+                <li>The information is transferred via the <span class="highlight">CAN bus network</span>(digital and analog communication ports) to the AERSVS.</li>
+                <li>AERSVS transfer the data to satellite using Iridium satellite modem.</li>
+            </ul>
+        <h3>Iridium 9603 Data Transfer Capabilities</h3>
+        <p>Designed for low-bandwidth, global data communication via the Iridium satellite network.</p>
+        <h2>Step 2:</h2>
+        <h3>Server Communication</h3>
+        <p>Data from the Iridium Ground station is sent to the server and categorized based on emergency type.</p>
         <p>
             <ul>
-                <li>Channel 1: Voice call</li>
-                <li>Channel 2: SMS</li>
-                <li>Channel 3: Email</li>
-                <li>Channel 4: Web portal</li>
+                <li>Case 1: 112 Services</li>
+                <li>Case 2: Nearest Emergency Services (NES)</li>
             </ul>
+             
         </p>
-        <h3>Case 2: Nearest Emergency Services (NES)</h3>
-        <p>
-            The system finds the nearest emergency services based on GPS coordinates and government databases.
-        </p>
-        <h2>Step 3: Emergency Contact Notification</h2>
+        <h2>Step 3:</h2>
+        <h3>Emergency Contact Notification</h3>
         <p>After confirming emergency detection, the system notifies predefined contacts via:</p>
         <p>
             <ul>
@@ -114,25 +89,15 @@
         </p>
         <h2>Step 4: Mobile Application Features</h2>
         <p>The mobile app enables real-time monitoring and alerts.</p>
-        <h3>VtoO Data Parameters</h3>
-        <p>
+        <p> 
             <ul>
-                <li>Vehicle Speed</li>
-                <li>Engine RPM</li>
-                <li>Fuel Level</li>
-                <li>Battery Voltage</li>
-                <li>Brake Status</li>
-                <li>Airbag Status</li>
-                <li>Diagnostic Trouble Codes (DTCs)</li>
+                <li>VtoO Data Parameters (vehicle to Owner)</li>
+                <li>VtoS Data Parameters (vehicle to Server)</li>
             </ul>
         </p>
-        <h2>Total Estimated Data Size Per Second</h2>
-        <div class="code">
-            <p>125 kbps → ~600 bytes/sec</p>
-            <p>250 kbps → ~1.2 KB/sec</p>
-            <p>500 kbps → ~6 KB/sec</p>
-            <p>1 Mbps → ~12 KB/sec</p>
+        <p style="text-align: center;">For more details <a href="https://docs.google.com/document/d/1PlJqgL8ABDE8_60TOjMkz1_6oP5uVKQXiCh5gLEcZmY/edit?usp=sharing">document</a>.</p>
+        <div class="footer">
+            <p>&copy; 2025 Global Emergency Network. All rights reserved.</p>
         </div>
-        <p>For more details<a href="https://docs.google.com/document/d/1PlJqgL8ABDE8_60TOjMkz1_6oP5uVKQXiCh5gLEcZmY/edit?usp=sharing">document</a>.</p>
-</body>
+    </body>
 </html>
