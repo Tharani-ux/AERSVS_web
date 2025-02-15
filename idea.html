@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AERSVS System</title>
     <style>
-       
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
         h1, h2, h3 {
             color: #ffcc00;
         }
@@ -35,72 +41,13 @@
         a:hover {
             text-decoration: underline;
         }
-   body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden;
-    background: black;
-    position: relative;
-}
-
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.star {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background-color: white;
-    border-radius: 50%;
-    pointer-events: none;
-    opacity: 0.8;
-    animation: twinkle 1.5s infinite;
-}
-
-@keyframes twinkle {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
-}
     </style>
-<script>
-    document.addEventListener('mousemove', function(e) {
-        for (let i = 0; i < 5; i++) {
-            let star = document.createElement('div');
-            star.classList.add('star');
-            document.body.appendChild(star);
-            
-            let x = e.clientX + (Math.random() * 50 - 25);
-            let y = e.clientY + (Math.random() * 50 - 25);
-            star.style.left = `${x}px`;
-            star.style.top = `${y}px`;
-            
-            setTimeout(() => {
-                star.remove();
-            }, 1000);
-        }
-    });
-</script>
 </head>
 <body>
-   
     <h1 style="text-align: center;">AUTOMATED EMERGENCY RESPONSE SYSTEM VIA SATELLITE</h1>
      <h1 style="text-align: center;">IDEA</h1>
     <div class="container">
-        <h2>Solution</h2>
-        <p>Road accidents in remote areas face delayed responses due to poor cellular coverage. This system uses satellite communication for automated emergency alerts and real-time GPS tracking, ensuring rapid response even in no-network zones. It detects severe impacts, allows manual emergency reporting, and notifies the nearest responders via multi-channel alerts. Additionally, it analyzes accident data to identify high-risk areas and inform relevant authorities.</p>
-        <h2>Step 1:</h2>
-        <h3>Scenario 1.1 Automated Triggering (AT)</h3>
+        <h2>Step 1: Scenario 1.1 Automated Triggering (AT)</h2>
         <p>When a car travels fast and suddenly crashes, the <span class="highlight">MEMS system</span> detects the crash and triggers the AERSVS system within 10 to 30 milliseconds.</p>
         <h3>Process Explanation</h3>
         <p>MEMS sensors detect the crash using accelerometers, brake sensors, and seatbelt sensors. The information is transferred via the <span class="highlight">CAN bus network</span>(digital and analog communication ports).</p>
