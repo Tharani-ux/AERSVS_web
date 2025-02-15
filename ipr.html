@@ -54,17 +54,31 @@
 
     <div class="container">
         <h1>Intellectual Property Rights (IPR) Proof</h1>
-        <p>Click the button below to view the IPR details of AERSVS.</p>
-        <button class="button" onclick="document.getElementById('ipr-proof').style.display='block'">Show IPR Proof</button>
+        <p>Click the button below to view or hide the IPR details of AERSVS.</p>
+        <button class="button" onclick="toggleIPR()">Show IPR Proof</button>
 
         <div id="ipr-proof">
             <h2>IPR Details:</h2>
-            <p><span class="highlight">Patent:</span> Application No. XXXX123456 (Pending/Granted)</p>
-            <p><span class="highlight">Trademark:</span> Registered under No. XXXX789012</p>
-            <p><span class="highlight">Copyright:</span> © 2025 AERSVS. All rights reserved.</p>
-            <p><span class="highlight">Design Registration:</span> Reg. No. XXXX345678</p>
+            <p><span class="highlight">Patent:</span> Application No. 	202541000674 (Provisional)</p>
+            <p><span class="highlight">Trademark:</span> NIL </p>
+            <p><span class="highlight">Copyright:</span> NIL </p>
+            <p><span class="highlight">Design Registration:</span> NIL </p>
         </div>
     </div>
 
+    <script>
+        function toggleIPR() {
+            var iprDetails = document.getElementById("ipr-proof");
+            var button = document.querySelector(".button");
+
+            if (iprDetails.style.display === "block") {
+                iprDetails.style.display = "none";
+                button.textContent = "Show IPR Proof";
+            } else {
+                iprDetails.style.display = "block";
+                button.textContent = "Hide IPR Proof";
+            }
+        }
+    </script>
+
 </body>
-</html>
