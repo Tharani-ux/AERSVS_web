@@ -46,7 +46,7 @@
         <h1>User Manual: Assembling & Wiring Your PCB Circuit</h1>
         
         <div class="section">
-            <h2>1. Understanding the Components & Connections</h2>
+            <h2>1. Understanding the Components</h2>
             <ul>
                 <li><a href="esp32.jpeg" target="_blank">ESP32-WROOM-32D</a> - Microcontroller</li>
                 <li><a href="mcp2515.jpg" target="_blank">MCP2515 CAN Module</a> - CAN Communication</li>
@@ -55,25 +55,17 @@
                 <li><a href="leds.png" target="_blank">LEDs (Rx, Tx, Power)</a> - Status Indicators</li>
                 <li><a href="power.jpeg" target="_blank">Power Supply (3.7V Li-ion & 5V Regulator)</a></li>
             </ul>
-        </div>
         
-        <div class="section">
+      
             <h2>2. Schematic Design in KiCad</h2>
-            <p>Steps to create a schematic:</p>
-            <ol>
-                <li>Open KiCad and create a new project.</li>
-                <li>Add components: ESP32, MCP2515, Iridium 9603N, etc.</li>
-                <li>Connect components using correct wiring.</li>
-                <li>Run an Electrical Rule Check (ERC).</li>
-            </ol>
-        </div>
+     
         
-        <div class="section">
+        
             <h2>3. PCB Layout in KiCad</h2>
-            <p>Ensure correct footprints, routing, and spacing.</p>
-        </div>
         
-        <div class="section">
+      
+        
+        
             <h2>4. Firmware Development for ESP32</h2>
             <p>Use the following code snippet to initialize CAN communication:</p>
             <code>
