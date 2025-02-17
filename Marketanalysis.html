@@ -41,15 +41,23 @@
         .image-container {
             text-align: center;
             margin: 20px 0;
+            position: relative;
+            overflow: hidden;
         }
-        .image-container img {
+        .zoom-img {
             max-width: 100%;
             border-radius: 8px;
-            cursor: zoom-in;
-            transition: transform 0.2s ease-in-out;
+            transition: transform 0.3s ease-in-out;
+            cursor: crosshair;
         }
-        .image-container img:hover {
-            transform: scale(1.05);
+        .zoom-wrapper {
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        .zoom-wrapper:hover .zoom-img {
+            transform: scale(2);
+            transform-origin: var(--x) var(--y);
         }
         .video-container {
             margin-top: 20px;
@@ -65,25 +73,6 @@
             body { padding: 10px; }
             iframe { height: 250px; }
         }
-        .magnifier-container {
-            position: relative;
-            display: inline-block;
-            cursor: zoom-in;
-        }
-        .magnifier-container img {
-            width: 100%;
-            border-radius: 8px;
-        }
-        .magnifier-lens {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border: 2px solid #ffcc00;
-            border-radius: 50%;
-            background-repeat: no-repeat;
-            background-size: 500% 500%; /* 5x zoom */
-            pointer-events: none;
-            display: none;
     </style>
 </head>
 <body>
@@ -93,14 +82,13 @@
 
         <div class="section">
             <h2>📄 Important Documents</h2>
-             
-            <a  href="idea.html" target="_blank">IDEA AERSVS</a>
-            <a  href="prototype.html" target="_blank">PROTOTYPE MANUAL</a>
-            <a  href="ipr.html" target="_blank">IPR AERSVS</a>
+            <a href="idea.html" target="_blank">IDEA AERSVS</a>
+            <a href="prototype.html" target="_blank">PROTOTYPE MANUAL</a>
+            <a href="ipr.html" target="_blank">IPR AERSVS</a>
         </div>
+
         <div class="section">
-            <h2>📄 Referance Documents</h2>
-             
+            <h2>📄 Reference Documents</h2>
             <a href="https://docs.google.com/document/d/1qahu9qel3lBe0MKrI40LPy_OVT-gzb8ZqdQSoFqk-Jg/edit?usp=sharing" target="_blank">Market Analysis Report: Automatic Emergency Response System in India</a>
             <a href="https://docs.google.com/document/d/1OEb1NxKFcfTEdPxw4ESXsO4rzI6gBz8AkmwLeK80nSM/edit?usp=sharing" target="_blank">Steps To Enter Market</a>
             <a href="https://docs.google.com/document/d/1-1Q_TVIe08VxWryLZd6PS0LIrBA4dOUa7XLDPq2iDeo/edit?usp=sharing" target="_blank">Probability of AERSVS</a>
@@ -111,11 +99,9 @@
             <h2>🖼️ Images</h2>
             <div class="image-container">
                 <h3>Flowchart</h3>
-                <img src="MAflowchart.png" alt="Flowchart">
-                 <div class="magnifier-container">
-                <img src="circuitdiagram.png" alt="Circuit Diagram" id="circuitImage">
-                <div class="magnifier-lens" id="lens"></div>
-            </div>
+                <div class="zoom-wrapper">
+                    <img src="MAflowchart.png" alt="Flowchart" class="zoom-img">
+                </div>
             </div>
         </div>
 
@@ -128,27 +114,18 @@
 
         <p>&copy; 2025 Global Emergency Network. All rights reserved.</p>
     </div>
-<script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const image = document.getElementById("circuitImage");
-            const lens = document.getElementById("lens");
-            const zoomFactor = 5; // Increased zoom to 5x
 
-            image.addEventListener("mousemove", function (event) {
-                const { left, top, width, height } = image.getBoundingClientRect();
-                const x = event.clientX - left;
-                const y = event.clientY - top;
-
-                lens.style.left = `${x - 50}px`;
-                lens.style.top = `${y - 50}px`;
-                lens.style.display = "block";
-                lens.style.backgroundImage = `url(${image.src})`;
-                lens.style.backgroundPosition = `-${x * zoomFactor - 50}px -${y * zoomFactor - 50}px`;
-                lens.style.backgroundSize = `${width * zoomFactor}px ${height * zoomFactor}px`;
+    <script>
+        document.querySelectorAll('.zoom-img').forEach(img => {
+            img.addEventListener('mousemove', (event) => {
+                const { left, top, width, height } = img.getBoundingClientRect();
+                const x = ((event.clientX - left) / width) * 100 + "%";
+                const y = ((event.clientY - top) / height) * 100 + "%";
+                img.style.setProperty('--x', x);
+                img.style.setProperty('--y', y);
             });
-
-            image.addEventListener("mouseleave", () => lens.style.display = "none");
         });
     </script>
+
 </body>
 </html>
