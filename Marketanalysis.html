@@ -65,6 +65,25 @@
             body { padding: 10px; }
             iframe { height: 250px; }
         }
+        .magnifier-container {
+            position: relative;
+            display: inline-block;
+            cursor: zoom-in;
+        }
+        .magnifier-container img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .magnifier-lens {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #ffcc00;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-size: 500% 500%; /* 5x zoom */
+            pointer-events: none;
+            display: none;
     </style>
 </head>
 <body>
@@ -93,6 +112,10 @@
             <div class="image-container">
                 <h3>Flowchart</h3>
                 <img src="MAflowchart.png" alt="Flowchart">
+                 <div class="magnifier-container">
+                <img src="circuitdiagram.png" alt="Circuit Diagram" id="circuitImage">
+                <div class="magnifier-lens" id="lens"></div>
+            </div>
             </div>
         </div>
 
@@ -105,6 +128,27 @@
 
         <p>&copy; 2025 Global Emergency Network. All rights reserved.</p>
     </div>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const image = document.getElementById("circuitImage");
+            const lens = document.getElementById("lens");
+            const zoomFactor = 5; // Increased zoom to 5x
 
+            image.addEventListener("mousemove", function (event) {
+                const { left, top, width, height } = image.getBoundingClientRect();
+                const x = event.clientX - left;
+                const y = event.clientY - top;
+
+                lens.style.left = `${x - 50}px`;
+                lens.style.top = `${y - 50}px`;
+                lens.style.display = "block";
+                lens.style.backgroundImage = `url(${image.src})`;
+                lens.style.backgroundPosition = `-${x * zoomFactor - 50}px -${y * zoomFactor - 50}px`;
+                lens.style.backgroundSize = `${width * zoomFactor}px ${height * zoomFactor}px`;
+            });
+
+            image.addEventListener("mouseleave", () => lens.style.display = "none");
+        });
+    </script>
 </body>
 </html>
