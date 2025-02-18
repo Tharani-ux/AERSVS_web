@@ -46,14 +46,17 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
             text-align: center;
+            width: 100%;
+            max-width: 400px;
         }
         
         input {
             margin: 10px 0;
             padding: 10px;
-            width: 200px;
+            width: 100%;
             border: none;
             border-radius: 5px;
+            box-sizing: border-box;
         }
 
         button {
@@ -64,10 +67,42 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: 100%;
         }
 
         button:hover {
             background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            .login-container {
+                padding: 30px;
+            }
+
+            input, button {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            .login-container {
+                padding: 20px;
+            }
+
+            input, button {
+                width: 80%;
+            }
         }
     </style>
 </head>
@@ -88,8 +123,8 @@
             event.preventDefault();
             
             // Sample credentials (modify as needed)
-            const adminUsername = 'admin';
-            const adminPassword = 'admin123';
+            const adminUsername = 'AERSVS';
+            const adminPassword = 'admin';
 
             const enteredUsername = document.getElementById('username').value;
             const enteredPassword = document.getElementById('password').value;
