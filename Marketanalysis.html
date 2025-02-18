@@ -69,9 +69,23 @@
             border-radius: 8px;
             border: none;
         }
+        @media screen and (max-width: 768px) {
+            body { padding: 15px; }
+            iframe { height: 300px; }
+            .container {
+                padding: 15px;
+            }
+        }
+
         @media screen and (max-width: 600px) {
             body { padding: 10px; }
             iframe { height: 250px; }
+            .section {
+                padding: 10px;
+            }
+            .image-container {
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
