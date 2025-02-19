@@ -156,25 +156,6 @@
             .image-container img {
                 max-width: 100%;
             }
-            .nav-button {
-                width: 80%;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 20px;
-            }
-            nav ul li a {
-                font-size: 16px;
-            }
-            .nav-button {
-                font-size: 16px;
-                width: 80%;
-            }
-            .footer {
-                font-size: 14px;
-            }
         }
     </style>
 </head>
@@ -212,27 +193,26 @@
             </div>
         </div>
 
+        <!-- Logout Button -->
+        <a href="logout.html" class="logout-button" onclick="logout()">LOGOUT</a>
+
         <p>&copy; 2025 Global Emergency Network. All rights reserved.</p>
     </div>
 
     <script>
- 
-        document.addEventListener("DOMContentLoaded", function () {
-    // Check if the user is logged in
-    if (sessionStorage.getItem('isLoggedIn') !== 'true') {
-        // Redirect to the login page if not logged in
-        window.location.href = 'index.html';  // Replace with your login page URL
-    }
-});
+        // Check if the user is logged in
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            // Redirect to the login page if not logged in
+            window.location.href = 'index.html';  // Replace with your login page URL
+        }
 
-// Logout function
-function logout() {
-    // Remove the login status from sessionStorage
-    sessionStorage.removeItem('isLoggedIn');
-    // Redirect to the login page
-    window.location.href = 'index.html';  // Replace with your login page URL
-}
-
+        // Logout function
+        function logout() {
+            // Remove the login status from localStorage
+            localStorage.removeItem('isLoggedIn');
+            // Redirect to the login page
+            window.location.href = 'index.html';  // Replace with your login page URL
+        }
     </script>
 </body>
 </html>
