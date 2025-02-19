@@ -216,19 +216,23 @@
     </div>
 
     <script>
-        // Check if the user is logged in
-        if (localStorage.getItem('isLoggedIn') !== 'true') {
-            // Redirect to the login page if not logged in
-            window.location.href = 'index.html';  // Replace with your login page URL
-        }
+ 
+        document.addEventListener("DOMContentLoaded", function () {
+    // Check if the user is logged in
+    if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+        // Redirect to the login page if not logged in
+        window.location.href = 'index.html';  // Replace with your login page URL
+    }
+});
 
-        // Logout function
-        function logout() {
-            // Remove the login status from localStorage
-            localStorage.removeItem('isLoggedIn');
-            // Redirect to the login page
-            window.location.href = 'index.html';  // Replace with your login page URL
-        }
+// Logout function
+function logout() {
+    // Remove the login status from sessionStorage
+    sessionStorage.removeItem('isLoggedIn');
+    // Redirect to the login page
+    window.location.href = 'index.html';  // Replace with your login page URL
+}
+
     </script>
 </body>
 </html>
