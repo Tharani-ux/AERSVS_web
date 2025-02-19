@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Emergency Network (AERSVS)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 36px;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #ffcc00, #ff6600, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: colorAnimation 2s infinite alternate;
+        }
+
+        @keyframes colorAnimation {
+            0% {
+                background: linear-gradient(90deg, #ffcc00, #ff6600);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            100% {
+                background: linear-gradient(90deg, #ff6600, #ffcc00);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        .login-container {
+            background-color: #1e1e1e;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 200px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Global Emergency Network (AERSVS)</h1>
+    
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Sample credentials (modify as needed)
+            const adminUsername = 'admin';
+            const adminPassword = 'admin123';
+
+            const enteredUsername = document.getElementById('username').value;
+            const enteredPassword = document.getElementById('password').value;
+
+            if (enteredUsername === adminUsername && enteredPassword === adminPassword) {
+                // Set the login status in localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                // Redirect to the main page
+                window.location.href = 'mainpage.html';  // Redirect to your main page
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+    </script>
+</body>
+</html>
