@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Emergency Network (AERSVS)</title>
+    <title>Global Emergency Network (AERSVS) - Admin Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,13 +47,37 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
             text-align: center;
         }
-        
+
         input {
             margin: 10px 0;
             padding: 10px;
             width: 200px;
             border: none;
             border-radius: 5px;
+        }
+
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-container input {
+            width: 180px;
+            padding-right: 30px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            color: #007bff;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
         }
 
         button {
@@ -78,29 +102,46 @@
         <h2>Admin Login</h2>
         <form id="loginForm">
             <input type="text" id="username" placeholder="Username" required><br>
-            <input type="password" id="password" placeholder="Password" required><br>
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Password" required>
+                <span class="toggle-password" onclick="togglePassword()">👁️</span>
+            </div>
             <button type="submit">Login</button>
         </form>
+        <p class="error" id="errorMessage"></p>
     </div>
 
     <script>
+        // Predefined Admin Credentials
+        const admins = {
+            "tharani": "22cs109",
+            "rishwanth": "22cs161",
+            "sarvesh": "22cs155"
+        };
+
+        // Show/Hide Password
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        }
+
+        // Login Form Event
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
-            // Sample credentials (modify as needed)
-            const adminUsername = 'admin';
-            const adminPassword = 'admin123';
 
             const enteredUsername = document.getElementById('username').value;
             const enteredPassword = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
 
-            if (enteredUsername === adminUsername && enteredPassword === adminPassword) {
-                // Set the login status in localStorage
+            if (admins[enteredUsername] && admins[enteredUsername] === enteredPassword) {
+                // Set login status in localStorage
                 localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', enteredUsername);
+
                 // Redirect to the main page
-                window.location.href = 'mainpage.html';  // Redirect to your main page
+                window.location.href = 'mainpage.html';
             } else {
-                alert('Invalid username or password');
+                errorMessage.textContent = "Invalid username or password!";
             }
         });
     </script>
