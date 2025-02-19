@@ -3,101 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AERSVS System</title>
+    <title>Global Emergency Network (AERSVS) - Admin Login</title>
     <style>
         body {
-            background-color: #121212;
-            color: #ffffff;
             font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            flex-direction: column;
         }
-        h1, h2, h3,h4 {
-            color: #ffcc00;
+
+        h1 {
+            font-weight: bold;
+            font-size: 36px;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #ffcc00, #ff6600, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: colorAnimation 2s infinite alternate;
         }
-        .container {
-            text-align: auto;
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            background: #1e1e1e;
+
+        @keyframes colorAnimation {
+            0% {
+                background: linear-gradient(90deg, #ffcc00, #ff6600);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            100% {
+                background: linear-gradient(90deg, #ff6600, #ffcc00);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+
+        .login-container {
+            background-color: #1e1e1e;
+            padding: 40px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-        }
-        .code {
-            background: #333;
-            padding: 10px;
-            border-radius: 5px;
-            font-family: monospace;
-            overflow-x: auto;
-        }
-        .highlight {
-            color: #ff5722;
-        }
-        a {
-            color: #ffcc00;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .footer {
             text-align: center;
-            margin-top: 20px;
+        }
+
+        input {
+            margin: 10px 0;
             padding: 10px;
-            background: #1e1e1e;
+            width: 200px;
+            border: none;
             border-radius: 5px;
+        }
+
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-container input {
+            width: 180px;
+            padding-right: 30px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            color: #007bff;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div>
-    <h1 style="text-align: center;">AUTOMATED EMERGENCY RESPONSE SYSTEM VIA SATELLITE</h1>
-     <h1 style="text-align: center;">IDEA</h1>
-    <div class="container">
-        <h2>Step 1:</h2>
-        <h3>Scenario 1.1 Automated Triggering (AT)</h3>
-        <p>When a car travels fast and suddenly crashes, the <span class="highlight">MEMS system</span> detects the crash and triggers the AERSVS system within 10 to 30 milliseconds.</p>
-        <h3>Scenario 1.2 Manual Triggering (UKB Button)</h3>
-        <p>The system can be manually triggered in case of emergencies via the <span class="highlight">Uyire Kapan Button (UKB)</span>, which is located in a safe position inside the car.</p>
-        <h3>Process Explanation</h3>
-        <p> 
-            <ul>
-                <li>MEMS sensors detect the crash using accelerometers, brake sensors, and seatbelt sensors.</li>
-                <li>The information is transferred via the <span class="highlight">CAN bus network</span>(digital and analog communication ports) to the AERSVS.</li>
-                <li>AERSVS transfer the data to satellite using Iridium satellite modem.</li>
-            </ul>
-        <h3>Iridium 9603 Data Transfer Capabilities</h3>
-        <p>Designed for low-bandwidth, global data communication via the Iridium satellite network.</p>
-        <h2>Step 2:</h2>
-        <h3>Server Communication</h3>
-        <p>Data from the Iridium Ground station is sent to the server and categorized based on emergency type.</p>
-        <p>
-            <ul>
-                <li>Case 1: 112 Services</li>
-                <li>Case 2: Nearest Emergency Services (NES)</li>
-            </ul>
-             
-        </p>
-        <h2>Step 3:</h2>
-        <h3>Emergency Contact Notification</h3>
-        <p>After confirming emergency detection, the system notifies predefined contacts via:</p>
-        <p>
-            <ul>
-                <li>Voice call</li>
-                <li>SMS</li>
-            </ul>
-        </p>
-        <h2>Step 4: Mobile Application Features</h2>
-        <p>The mobile app enables real-time monitoring and alerts.</p>
-        <p> 
-            <ul>
-                <li>VtoO Data Parameters (vehicle to Owner)</li>
-                <li>VtoS Data Parameters (vehicle to Server)</li>
-            </ul>
-        </p>
+    <h1>Global Emergency Network (AERSVS)</h1>
+    
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required><br>
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Password" required>
+                <span class="toggle-password" onclick="togglePassword()">👁️</span>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p class="error" id="errorMessage"></p>
     </div>
-        <p style="text-align: center;">For more details <a href="https://docs.google.com/document/d/1PlJqgL8ABDE8_60TOjMkz1_6oP5uVKQXiCh5gLEcZmY/edit?usp=sharing">document</a>.</p>
-        <p style="text-align: center;">&copy; 2025 Global Emergency Network. All rights reserved.</p>
+
+    <script>
+        // Predefined Admin Credentials
+        const admins = {
+            "tharani": "22cs109",
+            "rishwanth": "22cs161",
+            "sarvesh": "22cs155"
+        };
+
+        // Show/Hide Password
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        }
+
+        // Login Form Event
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const enteredUsername = document.getElementById('username').value;
+            const enteredPassword = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (admins[enteredUsername] && admins[enteredUsername] === enteredPassword) {
+                // Set login status in localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', enteredUsername);
+
+                // Redirect to the main page
+                window.location.href = 'mainpage.html';
+            } else {
+                errorMessage.textContent = "Invalid username or password!";
+            }
+        });
+    </script>
 </body>
 </html>
