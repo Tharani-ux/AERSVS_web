@@ -11,6 +11,7 @@ This is the official website for our **Automatic Emergency Response System via S
 - 🔒 **Secure & Reliable** – End-to-end encrypted data transmission.  
   
 📜 License
+
 **AERSVS** - Proprietary License
 This software is the property of THARANI P S and is protected under copyright law.
 
