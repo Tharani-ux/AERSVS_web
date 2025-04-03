@@ -21,4 +21,5 @@ Unauthorized use, copying, or distribution of this software may result in legal 
 
 📬 Contact
 For inquiries, feedback, or partnerships:
-📧 Email: pstharani.2004@gmail.com.
+
+Email: pstharani.2004@gmail.com.
