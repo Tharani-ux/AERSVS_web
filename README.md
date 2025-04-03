@@ -18,6 +18,7 @@ This software is the property of THARANI P S and is protected under copyright la
 Redistribution, modification, or use of this software, in part or in whole, is strictly prohibited without explicit written permission from the owner.
 
 Unauthorized use, copying, or distribution of this software may result in legal action.
+
 © 2025 THARANI P S. All Rights Reserved.
 
 📬 Contact
